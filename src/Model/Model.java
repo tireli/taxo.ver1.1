@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import View.dataTransferObjAddTaxo;
 import View.myAddTaxoListener;
 
-public class Model implements myAddTaxoListener {
-	private ArrayList<TaxoPark> ParkList;
+public class Model {
+	private ArrayList<TaxoPark> ParkList = new ArrayList<TaxoPark>();
 	
 	public void takeParkList(){
 		ParkList = new ParkListReader().getParkList();
@@ -14,7 +14,7 @@ public class Model implements myAddTaxoListener {
 	}
 
 	public Model() {
-		takeParkList();
+		
 	}
 		
 	public boolean putParkList(ArrayList<TaxoPark> ParkList){
@@ -23,15 +23,12 @@ public class Model implements myAddTaxoListener {
 		return ansver;
 	}
 
-	@Override
-	public void AddTaxo(dataTransferObjAddTaxo data) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("event add Taxo ");
-		
-		
+	public ArrayList<TaxoPark> getParkList() {
+		System.out.println("getParkList");
+		return ParkList;
 	}
 
+	
 	
 	
 	
