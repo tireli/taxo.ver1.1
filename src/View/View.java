@@ -9,7 +9,7 @@ public class View {
 	public View(Model model) {
 		// TODO Auto-generated constructor stub
 		
-		generalWindow = new Taksi();
+		generalWindow = new Taksi(model);
 		generalWindow.start();
 	}
 

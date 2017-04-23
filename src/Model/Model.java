@@ -2,7 +2,10 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Model {
+import View.dataTransferObjAddTaxo;
+import View.myAddTaxoListener;
+
+public class Model implements myAddTaxoListener {
 	private ArrayList<TaxoPark> ParkList;
 	
 	public void takeParkList(){
@@ -19,6 +22,17 @@ public class Model {
 		
 		return ansver;
 	}
+
+	@Override
+	public void AddTaxo(dataTransferObjAddTaxo data) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("event add Taxo ");
+		
+		
+	}
+
+	
 	
 	
 }
