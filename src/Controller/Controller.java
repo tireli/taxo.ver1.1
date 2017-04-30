@@ -1,9 +1,9 @@
 package Controller;
 
+import Controller.ControllInterface.myAddTaxoListener;
 import Model.Model;
 import View.View;
 import View.dataTransferObjAddTaxo;
-import View.myAddTaxoListener;
 
 public class Controller {
 	

@@ -1,5 +1,7 @@
 package View;
 
+import java.awt.EventQueue;
+
 import Model.Model;
 
 public class View {
@@ -8,11 +10,7 @@ public class View {
 	private Model model;
 
 	public View(Model model) {
-		// TODO Auto-generated constructor stub
-		
-		this.model = model;
 		generalWindow = new Taksi(model);
-		generalWindow.start();
 	}
 	
 	public void setChangeWindow(){

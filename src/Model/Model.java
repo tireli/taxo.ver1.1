@@ -2,8 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 
+import Controller.ControllInterface.myAddTaxoListener;
 import View.dataTransferObjAddTaxo;
-import View.myAddTaxoListener;
 
 public class Model {
 	private ArrayList<TaxoPark> ParkList = new ArrayList<TaxoPark>();
@@ -27,6 +27,8 @@ public class Model {
 		System.out.println("getParkList");
 		return ParkList;
 	}
+
+	
 
 	
 	
