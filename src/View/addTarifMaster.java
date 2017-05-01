@@ -6,7 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
@@ -15,7 +19,11 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 
-public class addTarifMaster extends JFrame {
+import Controller.ParkEventControll;
+import Controller.TarifController;
+import Model.Tarif;
+
+public class addTarifMaster extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField newTarfName;
@@ -29,29 +37,23 @@ public class addTarifMaster extends JFrame {
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	private JTextField textField_5;
 	private JTextField textField_6;
+	private TarifController myEventListener;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					addTarifMaster frame = new addTarifMaster();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public addTarifMaster() {
+		this.myEventListener = new TarifController();
+		launch();
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public addTarifMaster() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public void launch() {
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -240,10 +242,14 @@ public class addTarifMaster extends JFrame {
 		 */
 		JButton btnBackButton = new JButton("Назад");
 		btnBackButton.setBounds(12, 213, 117, 25);
+		btnBackButton.setActionCommand("BACK");
+		btnBackButton.addActionListener(this);
 		card1.add(btnBackButton);
 		
 		JButton btnNextButton = new JButton("Дальше");
 		btnNextButton.setBounds(141, 213, 117, 25);
+		btnNextButton.setActionCommand("NEXT");
+		btnNextButton.addActionListener(this);
 		card1.add(btnNextButton);
 		
 		JButton btnCancelButton = new JButton("Отмена");
@@ -254,10 +260,14 @@ public class addTarifMaster extends JFrame {
 		 */
 		JButton btnBackButton_card2 = new JButton("Назад");
 		btnBackButton_card2.setBounds(12, 213, 117, 25);
+		btnBackButton_card2.setActionCommand("BACK");
+		btnBackButton_card2.addActionListener(this);
 		card2.add(btnBackButton_card2);
 		
 		JButton btnNextButton_card2 = new JButton("Дальше");
 		btnNextButton_card2.setBounds(141, 213, 117, 25);
+		btnNextButton_card2.setActionCommand("NEXT");
+		btnNextButton_card2.addActionListener(this);
 		card2.add(btnNextButton_card2);
 		
 		JButton btnCancelButton_card2 = new JButton("Отмена");
@@ -268,10 +278,14 @@ public class addTarifMaster extends JFrame {
 		 */		
 		JButton btnBackButton_card3 = new JButton("Назад");
 		btnBackButton_card3.setBounds(12, 213, 117, 25);
+		btnBackButton_card3.setActionCommand("BACK");
+		btnBackButton_card3.addActionListener(this);
 		card3.add(btnBackButton_card3);
 		
 		JButton btnNextButton_card3 = new JButton("Дальше");
 		btnNextButton_card3.setBounds(141, 213, 117, 25);
+		btnNextButton_card3.setActionCommand("NEXT");
+		btnNextButton_card3.addActionListener(this);
 		card3.add(btnNextButton_card3);
 		
 		JButton btnCancelButton_card3 = new JButton("Отмена");
@@ -282,10 +296,14 @@ public class addTarifMaster extends JFrame {
 		 */	
 		JButton btnBackButton_card4 = new JButton("Назад");
 		btnBackButton_card4.setBounds(12, 213, 117, 25);
+		btnBackButton_card4.setActionCommand("BACK");
+		btnBackButton_card4.addActionListener(this);
 		card4.add(btnBackButton_card4);
 		
 		JButton btnNextButton_card4 = new JButton("Дальше");
 		btnNextButton_card4.setBounds(141, 213, 117, 25);
+		btnNextButton_card4.setActionCommand("NEXT");
+		btnNextButton_card4.addActionListener(this);
 		card4.add(btnNextButton_card4);
 		
 		JButton btnCancelButton_card4 = new JButton("Отмена");
@@ -296,15 +314,20 @@ public class addTarifMaster extends JFrame {
 		 */	
 		JButton btnBackButton_card5 = new JButton("Назад");
 		btnBackButton_card5.setBounds(12, 213, 117, 25);
+		btnBackButton_card5.setActionCommand("BACK");
+		btnBackButton_card5.addActionListener(this);
 		card5.add(btnBackButton_card5);
 		
 		JButton btnNextButton_card5 = new JButton("Готово");
 		btnNextButton_card5.setBounds(141, 213, 117, 25);
+		btnNextButton_card5.setActionCommand("OK");
+		btnNextButton_card5.addActionListener(this);
 		card5.add(btnNextButton_card5);
 		
 		JButton btnCancelButton_card5 = new JButton("Отмена");
 		btnCancelButton_card5.setBounds(311, 213, 117, 25);
 		card5.add(btnCancelButton_card5);
+		
 		
 		/*
 		 * 
@@ -323,4 +346,32 @@ public class addTarifMaster extends JFrame {
 		card3.add(textField_4);
 		textField_4.setColumns(10);
 	}
+	/*
+	 * Start event listener for cart changer
+	 */
+	@Override
+    public void actionPerformed(ActionEvent e) {
+		System.out.println("In Cards event");
+		System.out.println("ActionCommand " + e.getActionCommand());
+        CardLayout cl = (CardLayout) (contentPane.getLayout());
+        String cmd = e.getActionCommand();
+        if (cmd.equals("BACK")) {
+        	System.out.println("BACK");
+            cl.previous(contentPane);
+        } else if (cmd.equals("NEXT")) {
+        	System.out.println("NEXT");
+            cl.next(contentPane);
+        } else if (cmd.equals("OK")) {
+        	System.out.println("OK");
+        	if (myEventListener != null) {
+    			myEventListener.addNewTarif(new Tarif(newTarfName.getText()));
+    		}else {
+    			System.out.println("Null obj");
+    		}
+        } 
+    }
+  
+ //   ControlActionListenter cal = new ControlActionListenter();
+
+	
 }

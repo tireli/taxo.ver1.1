@@ -100,7 +100,7 @@ public class Taksi extends JFrame{
 		}
 		
 				
-		System.out.println("model.getParkList().toString() " + model.getParkList().toString());
+	//	System.out.println("model.getParkList().toString() " + model.getParkList().toString());
 		if (listModel != null) {
 			list.setModel(listModel);
 		}
@@ -263,6 +263,8 @@ public class Taksi extends JFrame{
 				/*
 				 * TO DO call to addTarifMaster
 				 */
+				addTarifMaster dialogAddTarif = new addTarifMaster();
+				
 			}
 		});
 		btnNewTaxAdd.setBounds(12, 234, 151, 25);

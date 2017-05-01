@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TaxoPark implements Serializable {
 	
@@ -21,11 +22,15 @@ public class TaxoPark implements Serializable {
 	//Fields
 	////////////////////////////////////////////////////////////////
 	private String name, citiName, taxiSystem;
-	
-	
+	private ArrayList<Tarif> TarifList;
+
+
 	////////////////////////////////////////////////////////////////
 	//Geters
 	////////////////////////////////////////////////////////////////
+	public ArrayList<Tarif> getTarifList() {
+		return TarifList;
+	}
 	/**
 	* @return the name
 	*/
@@ -49,6 +54,9 @@ public class TaxoPark implements Serializable {
 	////////////////////////////////////////////////////////////////
 	//Seters
 	////////////////////////////////////////////////////////////////
+	public void setTarifList(ArrayList<Tarif> tarifList) {
+		TarifList = tarifList;
+	}
 	/**
 	* @param Name the name to set
 	*/
@@ -93,6 +101,10 @@ public class TaxoPark implements Serializable {
 		}else {
 			return false;
 		}
+	}
+	
+	public void addTarif(Tarif T) {
+		this.TarifList.add(T);
 	}
 
 }
