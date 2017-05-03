@@ -47,8 +47,15 @@ public class Taksi extends JFrame{
 //	private listModel listModel = 
 	
 	private JList list;
-	private DefaultListModel listModel = new DefaultListModel();
+	
 
+
+	private DefaultListModel listModel = new DefaultListModel();
+	
+	
+	public JList getList() {
+		return list;
+	}
 
 	/**
 	 * Launch the application.

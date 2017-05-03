@@ -364,7 +364,8 @@ public class addTarifMaster extends JFrame implements ActionListener {
         } else if (cmd.equals("OK")) {
         	System.out.println("OK");
         	if (myEventListener != null) {
-    			myEventListener.addNewTarif(new Tarif(newTarfName.getText()));
+        		Tarif T = new Tarif(newTarfName.getText());
+    			myEventListener.addNewTarif(T);
     		}else {
     			System.out.println("Null obj");
     		}

@@ -18,4 +18,9 @@ public class View {
 		generalWindow.setCange();
 	}
 
+	public Taksi getGeneralWindow() {
+		return generalWindow;
+	}
+	
+
 }

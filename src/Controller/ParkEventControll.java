@@ -36,17 +36,25 @@ public class ParkEventControll extends Controller implements myAddTaxoListener {
 		
 		TaxoPark newTaxo = new TaxoPark(taxoName, taxoCitiName, taxoSystem);
 		addFlag = true;
-		if (nameList.size() > 0) {
-			for (int i = 0; i < nameList.size(); i++) {//For each TaxoPark check double
-				System.out.println("nameList[i] " + nameList.get(i));
-				System.out.println("nameList.get(i).equalsForTaxopark(newTaxo) = " + nameList.get(i).equalsForTaxopark(newTaxo));
-				if (nameList.get(i).equalsForTaxopark(newTaxo)){
-					System.out.println("Уже есть такой таксопарк");
-					addFlag = false;
+		if (nameList != null) {
+				
+			
+			if (nameList.size() > 0) {
+				for (int i = 0; i < nameList.size(); i++) {//For each TaxoPark check double
+					System.out.println("nameList[i] " + nameList.get(i));
+					System.out.println("nameList.get(i).equalsForTaxopark(newTaxo) = " + nameList.get(i).equalsForTaxopark(newTaxo));
+					if (nameList.get(i).equalsForTaxopark(newTaxo)){
+						System.out.println("Уже есть такой таксопарк");
+						addFlag = false;
+					}
 				}
+			}else{
+				System.out.println("nameList.size() " + nameList.size());
 			}
-		}else{
-			System.out.println("nameList.size() " + nameList.size());
+		}else {
+			nameList = new ArrayList<TaxoPark>();
+			//nameList.add(newTaxo);
+			model.setParkList(nameList);
 		}
 		
 		System.out.println("addFlag " + addFlag);

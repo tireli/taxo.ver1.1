@@ -28,6 +28,11 @@ public class Model{
 		System.out.println("getParkList");
 		return ParkList;
 	}
+	
+
+	public void setParkList(ArrayList<TaxoPark> parkList) {
+		ParkList = parkList;
+	}
 
 	public void WriteChanges() {
 		System.out.println("in WriteChanges");
