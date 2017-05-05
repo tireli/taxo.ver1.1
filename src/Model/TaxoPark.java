@@ -14,6 +14,7 @@ public class TaxoPark implements Serializable {
 		this.name = name;
 		this.citiName = citiName;
 		this.taxiSystem = taxiSystem;
+		TarifList = new ArrayList<Tarif>();
 	}
 	
 	
@@ -22,7 +23,7 @@ public class TaxoPark implements Serializable {
 	//Fields
 	////////////////////////////////////////////////////////////////
 	private String name, citiName, taxiSystem;
-	private ArrayList<Tarif> TarifList = new ArrayList<Tarif>();
+	private ArrayList<Tarif> TarifList;// = new ArrayList<Tarif>();
 
 
 	////////////////////////////////////////////////////////////////
