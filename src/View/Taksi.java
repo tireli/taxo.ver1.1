@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.ParkEventControll;
 import Model.Model;
+import Model.Tarif;
 import Model.TaxoPark;
 
 import javax.swing.AbstractListModel;
@@ -51,6 +52,8 @@ public class Taksi extends JFrame{
 
 
 	private DefaultListModel listModel = new DefaultListModel();
+	private JList listForTaxes;
+	private DefaultListModel tarifListModel;
 	
 	
 	public JList getList() {
@@ -281,8 +284,25 @@ public class Taksi extends JFrame{
 		btnTaxCange.setBounds(175, 234, 157, 25);
 		pnTax.add(btnTaxCange);
 		
-		JList listForTaxes = new JList();
+		listForTaxes = new JList();
 		listForTaxes.setBounds(12, 12, 491, 106);
+		/*
+		 * Tarif list
+		 * For first TaxoPark in list
+		 * or change to event
+		 */
+		tarifListModel = new DefaultListModel();
+		TaxoPark firstTaxoPark = MDList.get(0);
+		if (firstTaxoPark != null) {
+			ArrayList<Tarif> tarifList = firstTaxoPark.getTarifList();
+			if (tarifList != null) {
+				for (int i = 0; i < tarifList.size(); i++) {
+					Tarif curentTarif = tarifList.get(i);
+					tarifListModel.addElement(curentTarif.getTarifName()); 
+				}
+			}
+		}
+		listForTaxes.setModel(tarifListModel);
 		pnTax.add(listForTaxes);
 		
 		JPanel pnForTaxesView = new JPanel();
