@@ -36,6 +36,11 @@ public class writeFileOnDisk implements Runnable {
 		
 	}
 	
+	/*
+	public writeFileOnDisk(driverSuperList driverSuperListLink, String string) {
+		// TODO put in file superList
+	}*/
+	
 	
 	public boolean setParklist(){
 		

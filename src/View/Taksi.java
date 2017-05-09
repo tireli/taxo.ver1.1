@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.ParkEventControll;
+import Model.Driver;
 import Model.Model;
 import Model.Tarif;
 import Model.TaxoPark;
@@ -54,6 +55,7 @@ public class Taksi extends JFrame{
 	private DefaultListModel listModel = new DefaultListModel();
 	private JList listForTaxes;
 	private DefaultListModel tarifListModel;
+	private TaxoPark currentTaxoPark;
 	
 	
 	public JList getList() {
@@ -115,8 +117,64 @@ public class Taksi extends JFrame{
 			list.setModel(listModel);
 		}
 		
+		
 		repaint();
+		
 	//	initialize();
+	}
+	
+	public void driverSetChange() {
+		Object[][] driverInfo = null;
+		String[] tableTitleString = null;
+		/*
+		 * Get selected list item
+		 */
+		int currentTaxoParkIndex = list.getSelectedIndex();
+		System.out.println("currentTaxoParkIndex +  " + currentTaxoParkIndex);
+		try {
+			currentTaxoPark = MDList.get(currentTaxoParkIndex);
+			} catch (NullPointerException e) {
+			// TODO: handle exception
+				currentTaxoPark = MDList.get(0);
+			}catch (ArrayIndexOutOfBoundsException e) {
+				// TODO: handle exception
+				currentTaxoPark = MDList.get(0);
+			}
+		/*
+		 *  get info for new model of drivers table
+		 */
+		
+		try {
+			ArrayList<Driver> currentDriverList = currentTaxoPark.getDriverList();
+			driverInfo = new Object[currentDriverList.size()][6];
+			for (int i = 0; i < currentDriverList.size(); i++) {
+				System.out.println(currentDriverList.get(i).getName());
+				driverInfo[i][0] = currentDriverList.get(i).getName();
+				driverInfo[i][1] = "null";
+				driverInfo[i][2] = "null";
+				driverInfo[i][3] = "null";
+				driverInfo[i][4] = "null";
+				driverInfo[i][5] = "null";
+			}
+			
+			tableTitleString = new String[6];
+			tableTitleString[0] = "Имя";
+			tableTitleString[1] = "2";
+			tableTitleString[2] = "3";
+			tableTitleString[3] = "4";
+			tableTitleString[4] = "5";
+			tableTitleString[5] = "6";
+			
+			
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			
+		}
+		
+		DefaultTableModel driverTableModel = new DefaultTableModel(driverInfo, tableTitleString);
+		table_1.setModel(driverTableModel);
+		repaint();
+		
 	}
 
 	
@@ -191,6 +249,11 @@ public class Taksi extends JFrame{
 		tabbedPane.setBounds(244, 42, 520, 298);
 		frame.getContentPane().add(tabbedPane);
 		
+		
+		/*
+		 * Drivers List
+		 * get list from current taxopark
+		 */
 		JPanel pnDrivers = new JPanel();
 		tabbedPane.addTab("Водители", null, pnDrivers, null);
 		pnDrivers.setLayout(null);
@@ -205,33 +268,53 @@ public class Taksi extends JFrame{
 				{null, null, null, null, null, null},
 				{null, null, null, null, null, null},
 				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
 			},
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column", "New column"
 			}
 		));
+		driverSetChange();
+		/*
+		 * Drivers control buttons
+		 */
+		JButton btnLjf = new JButton("Добавить");
+		
+		btnLjf.setBounds(12, 234, 117, 25);
+		pnDrivers.add(btnLjf);
+		
+		JButton button = new JButton("Загрузить");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(141, 234, 117, 25);
+		pnDrivers.add(button);
+		
+		
 		scrDrivers.setViewportView(table_1);
+		
+		/*
+		 * Drivers Event
+		 */
+		/*
+		 * add Button
+		 */
+		btnLjf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Add Driver");
+				addDriver addDriverWindow = new addDriver();
+			}
+		});
+		
+		/*
+		 * Load Button
+		 */
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Load Driver");
+			}
+		});
+		
 		
 		table = new JTable();
 		table.setBounds(0, 0, 497, 176);
@@ -255,13 +338,7 @@ public class Taksi extends JFrame{
 			}
 		));
 		
-		JButton btnLjf = new JButton("Добавить");
-		btnLjf.setBounds(12, 234, 117, 25);
-		pnDrivers.add(btnLjf);
 		
-		JButton button = new JButton("Загрузить");
-		button.setBounds(141, 234, 117, 25);
-		pnDrivers.add(button);
 		
 		JPanel pnTax = new JPanel();
 		tabbedPane.addTab("Тарифы", null, pnTax, null);

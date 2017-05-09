@@ -16,6 +16,11 @@ public class View {
 	public void setChangeWindow(){
 		System.out.println("setChangeWindow");
 		generalWindow.setCange();
+		
+	}
+	
+	public void upDateDriverInfoInGeneralWindow(){
+		generalWindow.driverSetChange();
 	}
 
 	public Taksi getGeneralWindow() {

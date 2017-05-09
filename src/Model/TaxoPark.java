@@ -56,6 +56,13 @@ public class TaxoPark implements Serializable {
 	public String getCitiName() {
 	return citiName;
 	}
+	
+	/**
+	* @return the DriverList
+	*/
+	public ArrayList<Driver> getDriverList() {
+	return DriverList;
+	}
 	////////////////////////////////////////////////////////////////
 	//Seters
 	////////////////////////////////////////////////////////////////
@@ -81,6 +88,12 @@ public class TaxoPark implements Serializable {
 	*/
 	public void setCitiName(String citiName) {
 	this.citiName = citiName;
+	}
+	
+	public ArrayList<Driver> setDriverList() {
+		// TODO Auto-generated method stub
+		this.DriverList = new ArrayList<Driver>();
+		return DriverList;
 	}
 	
 	/* (non-Javadoc)
@@ -112,5 +125,6 @@ public class TaxoPark implements Serializable {
 		System.out.println(T);
 		TarifList.add(T);
 	}
+	
 
 }

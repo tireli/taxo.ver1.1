@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Driver extends Model implements Serializable {
 
 	private String name;
+	private String lastName;
+	private String phserName;
 	private String[] phones;
 	private String[] aliasNames;
 	private Tarif CurentTarif;
@@ -48,6 +50,12 @@ public class Driver extends Model implements Serializable {
 	public String getBankID() {
 		return bankID;
 	}
+	public String getLastName() {
+		return lastName;
+	}
+	public String getPhserName() {
+		return phserName;
+	}
 	public boolean isOneCvigruzka() {
 		return OneCvigruzka;
 	}
@@ -72,6 +80,38 @@ public class Driver extends Model implements Serializable {
 	public void setOneCvigruzka(boolean oneCvigruzka) {
 		OneCvigruzka = oneCvigruzka;
 	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public void setPhserName(String phserName) {
+		this.phserName = phserName;
+	}
+	public int compareDriver(Driver comparableDriver) {
+		// TODO Auto-generated method stub
+		String[] comparePhones = comparableDriver.getPhones();
+		boolean phoneCheck = false;
+		for (int i = 0; i < this.phones.length; i++) {
+			for (int j = 0; j < comparePhones.length; j++) {
+				if (this.phones[i] == comparePhones[j]) {
+					phoneCheck = true;
+				}
+			}
+		}
+		boolean nameCheck = false;
+		if (this.name == comparableDriver.getName() &&
+				this.lastName == comparableDriver.getLastName()) {
+			nameCheck = true;
+		}
+		
+		if (nameCheck && phoneCheck) {
+			return 2;
+		}else if (nameCheck || phoneCheck) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
 	
 	/*
 	 * Need Methods for working:

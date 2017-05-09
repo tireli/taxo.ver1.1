@@ -6,7 +6,8 @@ import Controller.ControllInterface.myAddTaxoListener;
 import View.dataTransferObjAddTaxo;
 
 public class Model{
-	private ArrayList<TaxoPark> ParkList = new ArrayList<TaxoPark>();
+	private ArrayList<TaxoPark> ParkList = new ArrayList<TaxoPark>();//driverSuperList
+	private driverSuperList driverSuperListLink = new driverSuperList();//<TaxoPark>();
 	
 	public ArrayList<TaxoPark> takeParkList(){
 		ParkList = new ParkListReader().getParkList();
@@ -45,6 +46,13 @@ public class Model{
 //		writeFileOnDisk wfod = new writeFileOnDisk(ParkList, "/aleksei/red/serFileToSave.fts");
 		Thread t = new Thread(new writeFileOnDisk(ParkList, "/home/aleksei/RED/serFileToSave.fts"));
 		t.start();
+		/*
+		Thread t2 = new Thread(new writeFileOnDisk(driverSuperListLink, "/home/aleksei/RED/serFileToSave2.fts"));
+		t2.start();*/
+	}
+
+	public driverSuperList getDriverSuperListLink() {
+		return driverSuperListLink;
 	}
 
 	
