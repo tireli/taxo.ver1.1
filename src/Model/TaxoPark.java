@@ -9,12 +9,16 @@ public class TaxoPark implements Serializable {
 //Constructors
 ////////////////////////////////////////////////////////////////
 	
+	private ArrayList<Driver> DriverList;
+
+
 	public TaxoPark(String name, String citiName, String taxiSystem) {
 	// TODO Auto-generated constructor stub
 		this.name = name;
 		this.citiName = citiName;
 		this.taxiSystem = taxiSystem;
 		TarifList = new ArrayList<Tarif>();
+		DriverList = new ArrayList<Driver>();
 	}
 	
 	

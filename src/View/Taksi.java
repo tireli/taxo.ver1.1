@@ -292,13 +292,18 @@ public class Taksi extends JFrame{
 		 * or change to event
 		 */
 		tarifListModel = new DefaultListModel();
-		TaxoPark firstTaxoPark = MDList.get(0);
-		if (firstTaxoPark != null) {
-			ArrayList<Tarif> tarifList = firstTaxoPark.getTarifList();
-			if (tarifList != null) {
-				for (int i = 0; i < tarifList.size(); i++) {
-					Tarif curentTarif = tarifList.get(i);
-					tarifListModel.addElement(curentTarif.getTarifName()); 
+		/*
+		 * Get selected taxoPark items, like default item of cheese 
+		 */
+		if (MDList != null) {
+			TaxoPark firstTaxoPark = MDList.get(0);
+			if (firstTaxoPark != null) {
+				ArrayList<Tarif> tarifList = firstTaxoPark.getTarifList();
+				if (tarifList != null) {
+					for (int i = 0; i < tarifList.size(); i++) {
+						Tarif curentTarif = tarifList.get(i);
+						tarifListModel.addElement(curentTarif.getTarifName()); 
+					}
 				}
 			}
 		}

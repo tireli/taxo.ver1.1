@@ -25,7 +25,7 @@ public class addTaxo extends JFrame implements ActionListener{
 	private JLabel lblNewTaxoSelfName;
 	private JTextField textFieldNewTaxoSelfName;
 	private myAddTaxoListener myEventListener;
-	protected String licenseKey;
+	protected String licenseKey = "Zalushka";
 	private JComboBox comboBox;
 	
 	
@@ -120,6 +120,7 @@ public class addTaxo extends JFrame implements ActionListener{
 		System.out.println("New ActionEvent e " + e);
 		setVisible(false);
 		System.out.println("Get event in new window: " + textFieldNewTaxoSelfName);
+		System.out.println(txtNewTaxoCitiName);
 		if (myEventListener != null) {
 			myEventListener.AddTaxo(new dataTransferObjAddTaxo(txtNewTaxoCitiName, 
 					 textFieldNewTaxoSelfName, comboBox, licenseKey));

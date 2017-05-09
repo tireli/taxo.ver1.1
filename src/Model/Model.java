@@ -11,7 +11,13 @@ public class Model{
 	public ArrayList<TaxoPark> takeParkList(){
 		ParkList = new ParkListReader().getParkList();
 		System.out.println(ParkList);
-		return ParkList;
+		if (ParkList != null) {
+			return ParkList;
+		}else {
+			 
+			return getParkList();//ParkList;
+		}
+		
 	}
 
 	public Model() {
