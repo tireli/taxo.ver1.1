@@ -34,6 +34,8 @@ import Model.Tarif;
 import Model.TaxoPark;
 
 import javax.swing.AbstractListModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 
 public class Taksi extends JFrame{
@@ -221,6 +223,20 @@ public class Taksi extends JFrame{
 		pLeftTList.setLayout(null);
 		
 		list = new JList();
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+			/*	try {
+					currentTaxoPark = MDList.get(list.getSelectedIndex());
+					} catch (NullPointerException err) {
+					// TODO: handle exception
+						currentTaxoPark = MDList.get(0);
+					}catch (ArrayIndexOutOfBoundsException err) {
+						// TODO: handle exception
+						currentTaxoPark = MDList.get(0);
+					}*/
+				driverSetChange();
+			}
+		});
 	//	listModel = new DefaultListModel();
 		
 		
