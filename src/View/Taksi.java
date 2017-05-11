@@ -289,6 +289,9 @@ public class Taksi extends JFrame{
 		});
 		button.setBounds(141, 234, 117, 25);
 		pnDrivers.add(button);
+		JButton driverDeletAllBTN = new JButton("Удалить всех");
+		driverDeletAllBTN.setBounds(270, 234, 151, 25);
+		pnDrivers.add(driverDeletAllBTN);
 		
 		
 		scrDrivers.setViewportView(table_1);
@@ -314,8 +317,16 @@ public class Taksi extends JFrame{
 				System.out.println("Load Driver");
 			}
 		});
+		/*
+		 * Delet all Button
+		 */
 		
-		
+		driverDeletAllBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ParkEventControll deletAll = new ParkEventControll();
+				deletAll.deleteAllDriverEvent();
+			}
+		});
 		table = new JTable();
 		table.setBounds(0, 0, 497, 176);
 		pnDrivers.add(table);
@@ -337,6 +348,9 @@ public class Taksi extends JFrame{
 				"\u2116", "\u0418\u043C\u044F", "\u0422\u0435\u043B\u0435\u0444\u043E\u043D", "\u0421\u0447\u0435\u0442", "1\u0421", "\u0422\u0430\u0440\u0438\u0444"
 			}
 		));
+		
+		
+		
 		
 		
 		

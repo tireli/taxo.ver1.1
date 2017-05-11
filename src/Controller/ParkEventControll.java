@@ -106,6 +106,7 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 		 * Do add new Driver
 		 * 1 - find selected taxoPark
 		 */
+		boolean dirverAddInListFlag = false;
 		ArrayList<TaxoPark> taxoParkList = model.getParkList();
 		Taksi GeneralWindow = view.getGeneralWindow();
 		JList ViewModelList = GeneralWindow.getList();
@@ -133,21 +134,25 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 				driverList = currentTaxoPark.setDriverList();
 			}
 			
-			for (int i = 0; i < driverList.size(); i++) {
+			outer:	for (int i = 0; i < driverList.size(); i++) {
 				Driver comparableDriver = driverList.get(i);
-				System.out.println("Start Driver compare");
+				System.out.println("Start Driver compare at i = " + i);
+				System.out.println("driverList.get(i) = " + driverList.get(i).getName());
 				switch (driver.compareDriver(comparableDriver)) {
 				case DRIVER_COMPARE_OK:
 					/*
 					 * Driver Find
 					 * to do - nothing
 					 */
-					break;
+					System.out.println("DRIVER_COMPARE_OK FOR 1");
+					continue outer;
+				//	break;
 				case DRIVER_COMPARE_WARNING:
 					/*
 					 * Driver not find, but heave same fields
 					 * to do - search in superList
 					 */
+					System.out.println("DRIVER_COMPARE_WARNING FOR 1");
 					ArrayList<Driver> driverSuberList = model.getDriverSuperListLink().getSuperList();
 					for (int j = 0; j < driverSuberList.size(); j++) {
 						Driver secondCompareDriver = driverSuberList.get(j);
@@ -157,39 +162,54 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 							 * Driver Find
 							 * to do - nothing
 							 */
-							driverSuberList.add(driver);
-							break;
+						//	driverSuberList.add(driver);
+							System.out.println("DRIVER_COMPARE_OK FOR 2");
+							
+							continue;
+						//	break;
 						case DRIVER_COMPARE_WARNING:
+							System.out.println("DRIVER_COMPARE_WARNING FOR 2");
+							
 							break;
 						case DRIVER_COMPARE_ERROR:
 							/*
 							 * Driver not find
 							 */
+							System.out.println("DRIVER_COMPARE_ERROR FOR 2");
 							driverSuberList.add(driver);
+							System.out.println("Start Driver add 2 ERR");
+							driverList.add(driver);
 							break;
 
 						default:
 							break;
 						}
 					}
-					
-					driverList.add(driver);
-					break;
+					dirverAddInListFlag = false;
+					break outer;
+				//	break;
 				case DRIVER_COMPARE_ERROR:
 					/*
 					 * Driver not find
 					 */
-					driverList.add(driver);
-					break;
+					System.out.println("DRIVER_COMPARE_ERROR FOR 1");
+					System.out.println("Start Driver add 1 ERR");
+					
+			//		driverList.add(driver);
+					dirverAddInListFlag = true;
+			//		break outer;
 
 				default:
 					break;
 				}
-				
+			System.out.println("dirverAddInListFlag in FOR " + dirverAddInListFlag);
 			}
-			System.out.println("driverList.size() " + driverList.size());
+			System.out.println("dirverAddInListFlag " + dirverAddInListFlag);
 			if (driverList.size() <= 0) {
 				System.out.println("Start Driver add");
+				driverList.add(driver);
+			}
+			if (dirverAddInListFlag) {
 				driverList.add(driver);
 			}
 			/*
@@ -244,6 +264,33 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 		
 		view.setChangeWindow();
 		model.WriteChanges();
+	}
+
+	public void deleteAllDriverEvent() {
+		// TODO Auto-generated method stub
+		ArrayList<TaxoPark> taxoParkList = model.getParkList();
+		Taksi GeneralWindow = view.getGeneralWindow();
+		JList ViewModelList = GeneralWindow.getList();
+		if (ViewModelList != null) {
+			int currentTaxoParkIndex = ViewModelList.getSelectedIndex();
+			System.out.println("currentTaxoParkIndex +  " + currentTaxoParkIndex);
+			try {
+				currentTaxoPark = taxoParkList.get(currentTaxoParkIndex);
+				} catch (NullPointerException e) {
+				// TODO: handle exception
+					currentTaxoPark = taxoParkList.get(0);
+				}catch (ArrayIndexOutOfBoundsException e) {
+					// TODO: handle exception
+					currentTaxoPark = taxoParkList.get(0);
+				}
+		}
+			
+		driverList = currentTaxoPark.getDriverList();	
+		driverList.clear();
+		
+		view.upDateDriverInfoInGeneralWindow();
+		model.WriteChanges();
+		
 	}
 
 }

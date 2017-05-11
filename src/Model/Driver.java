@@ -90,16 +90,22 @@ public class Driver extends Model implements Serializable {
 		// TODO Auto-generated method stub
 		String[] comparePhones = comparableDriver.getPhones();
 		boolean phoneCheck = false;
+		System.out.println("phoneCheck =  " + phoneCheck);
 		for (int i = 0; i < this.phones.length; i++) {
 			for (int j = 0; j < comparePhones.length; j++) {
-				if (this.phones[i] == comparePhones[j]) {
-					phoneCheck = true;
+				System.out.println(this.phones[i]  + " = " +  comparePhones[j]);
+				if (this.phones[i] != null && comparePhones[j] != null) {
+					if (this.phones[i].equals(comparePhones[j])) {
+						phoneCheck = true;
+					}
 				}
+				
 			}
 		}
+		System.out.println("phoneCheck =  " + phoneCheck);
 		boolean nameCheck = false;
-		if (this.name == comparableDriver.getName() &&
-				this.lastName == comparableDriver.getLastName()) {
+		if (this.name == comparableDriver.getName()/* &&
+				this.lastName == comparableDriver.getLastName()*/) {
 			nameCheck = true;
 		}
 		
