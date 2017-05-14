@@ -120,6 +120,7 @@ public class Taksi extends JFrame{
 		}
 		
 		
+		
 		repaint();
 		
 	//	initialize();
@@ -151,9 +152,11 @@ public class Taksi extends JFrame{
 			driverInfo = new Object[currentDriverList.size()][6];
 			for (int i = 0; i < currentDriverList.size(); i++) {
 				System.out.println(currentDriverList.get(i).getName());
-				driverInfo[i][0] = currentDriverList.get(i).getName();
-				driverInfo[i][1] = "null";
-				driverInfo[i][2] = "null";
+				driverInfo[i][0] = currentDriverList.get(i).getLastName() + " "
+						+ currentDriverList.get(i).getName() + " "
+						+ currentDriverList.get(i).getPhserName();
+				driverInfo[i][1] = currentDriverList.get(i).getPhones();
+				driverInfo[i][2] = currentDriverList.get(i).getCurentTarif().getTarifName();
 				driverInfo[i][3] = "null";
 				driverInfo[i][4] = "null";
 				driverInfo[i][5] = "null";
@@ -161,14 +164,17 @@ public class Taksi extends JFrame{
 			
 			tableTitleString = new String[6];
 			tableTitleString[0] = "Имя";
-			tableTitleString[1] = "2";
-			tableTitleString[2] = "3";
-			tableTitleString[3] = "4";
+			tableTitleString[1] = "Телефон";
+			tableTitleString[2] = "Тариф";
+			tableTitleString[3] = "Резидент";
 			tableTitleString[4] = "5";
 			tableTitleString[5] = "6";
 			
 			
 		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			
+		} catch (NullPointerException e) {
 			// TODO: handle exception
 			
 		}
@@ -179,6 +185,36 @@ public class Taksi extends JFrame{
 		
 	}
 
+	public void tarifSetChange(){
+		int currentTaxoParkIndex = list.getSelectedIndex();
+		System.out.println("currentTaxoParkIndex +  " + currentTaxoParkIndex);
+		try {
+			currentTaxoPark = MDList.get(currentTaxoParkIndex);
+			} catch (NullPointerException e) {
+			// TODO: handle exception
+				currentTaxoPark = MDList.get(0);
+			}catch (ArrayIndexOutOfBoundsException e) {
+				// TODO: handle exception
+				currentTaxoPark = MDList.get(0);
+			}
+		
+		tarifListModel = new DefaultListModel();
+		/*
+		 * Get selected taxoPark items, like default item of cheese 
+		 */
+		
+				ArrayList<Tarif> tarifList = currentTaxoPark.getTarifList();
+				if (tarifList != null) {
+					for (int i = 0; i < tarifList.size(); i++) {
+						Tarif curentTarif = tarifList.get(i);
+						tarifListModel.addElement(curentTarif.getTarifName()); 
+					}
+				}
+			
+		
+		listForTaxes.setModel(tarifListModel);
+		
+	}
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -235,6 +271,7 @@ public class Taksi extends JFrame{
 						currentTaxoPark = MDList.get(0);
 					}*/
 				driverSetChange();
+				tarifSetChange();
 			}
 		});
 	//	listModel = new DefaultListModel();
@@ -278,18 +315,25 @@ public class Taksi extends JFrame{
 		scrDrivers.setBounds(0, 0, 497, 210);
 		pnDrivers.add(scrDrivers);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column"
-			}
-		));
-		driverSetChange();
+		try {
+			driverSetChange();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			table_1 = new JTable();
+			table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+				},
+				new String[] {
+					"New column", "New column", "New column", "New column", "New column", "New column"
+				}
+				));
+		}
+		
+		
+		
 		/*
 		 * Drivers control buttons
 		 */
@@ -321,7 +365,7 @@ public class Taksi extends JFrame{
 		btnLjf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Add Driver");
-				addDriver addDriverWindow = new addDriver();
+				addDriver addDriverWindow = new addDriver(currentTaxoPark);
 			}
 		});
 		
@@ -402,6 +446,7 @@ public class Taksi extends JFrame{
 		/*
 		 * Get selected taxoPark items, like default item of cheese 
 		 */
+		/*
 		if (MDList != null) {
 			TaxoPark firstTaxoPark = MDList.get(0);
 			if (firstTaxoPark != null) {
@@ -414,7 +459,15 @@ public class Taksi extends JFrame{
 				}
 			}
 		}
-		listForTaxes.setModel(tarifListModel);
+		listForTaxes.setModel(tarifListModel);*/
+		
+		try {
+			tarifSetChange();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			listForTaxes.setModel(tarifListModel);
+		}
+		
 		pnTax.add(listForTaxes);
 		
 		JPanel pnForTaxesView = new JPanel();

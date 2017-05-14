@@ -35,11 +35,20 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 	final private int DRIVER_COMPARE_WARNING = 1;
 	final private int DRIVER_COMPARE_ERROR = 0;
 	private ArrayList<Driver> driverList;
+	private ArrayList<TaxoPark> nameList;
 	
 	@Override
 	public void AddTaxo(dataTransferObjAddTaxo data) {
+		addFlag = true;
+		try {
+			nameList = model.getParkList();// Old DATA from model
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+		//	model.setParkList(new ArrayList<TaxoPark>());
+		//	nameList = model.getParkList();// Old DATA from model
+			addFlag = false;
+		}
 		
-		ArrayList<TaxoPark> nameList = model.getParkList();// Old DATA from model
 		
 		// TODO Auto-generated method stub
 		System.out.println("Add Taxo event");
@@ -49,8 +58,8 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 		this.taxoSystem = data.getComboBox().getSelectedItem().toString();
 		
 		TaxoPark newTaxo = new TaxoPark(taxoName, taxoCitiName, taxoSystem);
-		addFlag = true;
-		if (nameList != null) {
+		
+		if (nameList != null && addFlag) {
 				
 			
 			if (nameList.size() > 0) {

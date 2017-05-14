@@ -13,6 +13,7 @@ public class Driver extends Model implements Serializable {
 	private Account CurentAccount;
 	private String bankID;
 	private boolean OneCvigruzka;
+	private Resident residentType;
 //	private 
 //	private 
 	
@@ -31,6 +32,18 @@ public class Driver extends Model implements Serializable {
 		this.name = name;
 		this.phones = new String[5];
 		this.phones[0] = phone;
+	}
+	public Driver(String name, String phone, String lastName, String phserName,
+			Tarif tarif/*, Resident resident*/) {
+		// TODO Auto-generated constructor stub
+		this.name = name;
+		this.lastName = lastName;
+		this.phserName = phserName;
+		this.phones = new String[5];
+		this.phones[0] = phone;
+		this.CurentTarif = tarif;
+		//this.residentType = resident;
+		
 	}
 	public String getName() {
 		return name;
