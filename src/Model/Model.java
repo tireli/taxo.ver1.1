@@ -49,6 +49,8 @@ public class Model{
 		/*
 		Thread t2 = new Thread(new writeFileOnDisk(driverSuperListLink, "/home/aleksei/RED/serFileToSave2.fts"));
 		t2.start();*/
+		
+		
 	}
 
 	public driverSuperList getDriverSuperListLink() {

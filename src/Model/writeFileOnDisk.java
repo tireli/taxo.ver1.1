@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class writeFileOnDisk implements Runnable {
 
 	private ArrayList<TaxoPark> parkList;
+	private ArrayList<driverSuperList> driverSuperListLink;
 	private File f1;
 	private File f;
 	
@@ -41,6 +42,22 @@ public class writeFileOnDisk implements Runnable {
 		// TODO put in file superList
 	}*/
 	
+	/*
+	public writeFileOnDisk(ArrayList<driverSuperList> driverSuperListLink, String f1) {
+		// TODO Auto-generated constructor stub
+		this.driverSuperListLink = driverSuperListLink;
+		File f = new File(f1);
+		try {
+			f.createNewFile();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		this.f1 = (File) f;
+		if (f.exists()) {
+			System.out.println("Файл создан в конструкторе");
+		}
+		
+	}*/
 	
 	public boolean setParklist(){
 		

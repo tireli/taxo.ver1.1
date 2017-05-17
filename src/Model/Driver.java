@@ -32,6 +32,7 @@ public class Driver extends Model implements Serializable {
 		this.name = name;
 		this.phones = new String[5];
 		this.phones[0] = phone;
+		this.CurentAccount = new Account();
 	}
 	public Driver(String name, String phone, String lastName, String phserName,
 			Tarif tarif/*, Resident resident*/) {
@@ -42,6 +43,7 @@ public class Driver extends Model implements Serializable {
 		this.phones = new String[5];
 		this.phones[0] = phone;
 		this.CurentTarif = tarif;
+		this.CurentAccount = new Account();
 		//this.residentType = resident;
 		
 	}

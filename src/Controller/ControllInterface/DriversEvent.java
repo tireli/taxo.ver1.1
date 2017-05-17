@@ -14,5 +14,7 @@ public interface DriversEvent {
 	public void deleteAllDriverEvent(); 
 	
 	public void addMenyDriverEvent(Driver driver); 
+	
+	public void addMenyDriverEvent(); 
 
 }

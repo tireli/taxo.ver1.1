@@ -1,6 +1,8 @@
 package Controller;
 
 import java.awt.Component;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -10,6 +12,7 @@ import Controller.ControllInterface.DriversEvent;
 import Controller.ControllInterface.myAddTaxoListener;
 import Model.Driver;
 import Model.Model;
+import Model.Tarif;
 import Model.TaxoPark;
 import Model.changeInfo;
 import Model.driverSuperList;
@@ -110,7 +113,7 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 	@Override
 	public void addDriverEvent(Driver driver) {
 		// TODO Auto-generated method stub
-		System.out.println(driver.getName() + "  -  " + driver.getPhones());
+		System.out.println(driver.getName() + "  ****  " + driver.getPhones());
 		/*
 		 * Do add new Driver
 		 * 1 - find selected taxoPark
@@ -274,6 +277,40 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 		view.setChangeWindow();
 		model.WriteChanges();
 	}
+	
+	@Override
+	public void addMenyDriverEvent() {
+		// TODO Auto-generated method stub
+		 try {
+			 	String filename = "/home/aleksei/RED/drivers08-15.csv";
+		        BufferedReader fp = new BufferedReader(new FileReader(filename));
+
+		       /* String[] hdr = fp.readLine().split(";");
+		        if(hdr != null)
+		            System.out.println(hdr[0] + "\t\t\t" + "name\t" + hdr[hdr.length - 1]);
+*/
+		        String[] cols;
+		        int co = 0;
+		        while(fp.ready()){
+		//        while(co < 20){
+		            cols = fp.readLine().split(",");
+		            for(int i  = 0; i < cols.length; i++)
+		                System.out.println(cols[0] + "^^^^^^" + '\t' + cols[i]);
+		            
+		            addDriverEvent(new Driver(cols[0], cols[3], "", "", new Tarif("Auto DEFAULT")));
+		            co++;	
+		            cols = null;
+		       }
+		        fp.close();
+		        fp  = null;
+		//        hdr = null;
+		    } catch(Exception e){
+		        e.printStackTrace();
+		    }
+		
+		view.setChangeWindow();
+		model.WriteChanges();
+	}
 
 	public void deleteAllDriverEvent() {
 		// TODO Auto-generated method stub
@@ -301,5 +338,7 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 		model.WriteChanges();
 		
 	}
+
+	
 
 }
