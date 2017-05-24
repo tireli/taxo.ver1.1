@@ -16,6 +16,7 @@ import Model.Tarif;
 import Model.TaxoPark;
 import Model.changeInfo;
 import Model.driverSuperList;
+import Utilities.csvReader;
 import View.Taksi;
 import View.dataTransferObjAddTaxo;
 
@@ -281,32 +282,19 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 	@Override
 	public void addMenyDriverEvent() {
 		// TODO Auto-generated method stub
+		csvReader csvReader = new csvReader("/home/aleksei/RED/drivers08-15.csv");
 		 try {
-			 	String filename = "/home/aleksei/RED/drivers08-15.csv";
-		        BufferedReader fp = new BufferedReader(new FileReader(filename));
-
-		       /* String[] hdr = fp.readLine().split(";");
-		        if(hdr != null)
-		            System.out.println(hdr[0] + "\t\t\t" + "name\t" + hdr[hdr.length - 1]);
-*/
-		        String[] cols;
-		        int co = 0;
-		        while(fp.ready()){
-		//        while(co < 20){
-		            cols = fp.readLine().split(",");
-		            for(int i  = 0; i < cols.length; i++)
-		                System.out.println(cols[0] + "^^^^^^" + '\t' + cols[i]);
-		            
-		            addDriverEvent(new Driver(cols[0], cols[3], "", "", new Tarif("Auto DEFAULT")));
-		            co++;	
-		            cols = null;
-		       }
-		        fp.close();
-		        fp  = null;
-		//        hdr = null;
-		    } catch(Exception e){
-		        e.printStackTrace();
-		    }
+			String[] cols = csvReader.nextItem();
+			 while (cols != null) {
+				 
+				 addDriverEvent(new Driver(cols[0], cols[3], "", "", new Tarif("Auto DEFAULT")));
+				 cols = csvReader.nextItem();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+			 
+		// addDriverEvent(new Driver(cols[0], cols[3], "", "", new Tarif("Auto DEFAULT")));
 		
 		view.setChangeWindow();
 		model.WriteChanges();
