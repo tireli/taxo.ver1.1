@@ -10,6 +10,7 @@ import javax.swing.JList;
 
 import Controller.ControllInterface.DriversEvent;
 import Controller.ControllInterface.myAddTaxoListener;
+import Controller.ControllInterface.tripEvents;
 import Model.Driver;
 import Model.Model;
 import Model.Tarif;
@@ -20,7 +21,7 @@ import Utilities.csvReader;
 import View.Taksi;
 import View.dataTransferObjAddTaxo;
 
-public class ParkEventControll extends Controller implements myAddTaxoListener, DriversEvent {
+public class ParkEventControll extends Controller implements myAddTaxoListener, DriversEvent, tripEvents {
 	
 	private dataTransferObjAddTaxo addTaxo;
 	private String taxoName;
@@ -324,6 +325,12 @@ public class ParkEventControll extends Controller implements myAddTaxoListener, 
 		
 		view.upDateDriverInfoInGeneralWindow();
 		model.WriteChanges();
+		
+	}
+
+	@Override
+	public void addTripsFromCSV() {
+		// TODO Auto-generated method stub
 		
 	}
 
